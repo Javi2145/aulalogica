@@ -3,7 +3,7 @@
 </p>
 
 ## (OJO) https://aulalogica.onrender.com (el plan gratuito tarda ~1 min en despertar)
-
+## REQUISITO PARA INGRESAR A LA PÁGINA WEB SE DEBE INGRESAR DESDE UN COMPUTADOR O LAPTOP
 Aplicativo didáctico de **Fundamentos de Programación en Java** — Proyecto Integrador,
 Universidad Técnica de Ambato · FISEI · Ing. José Caiza · julio–diciembre de 2026.
 
