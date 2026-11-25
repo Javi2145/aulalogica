@@ -12,12 +12,6 @@ sencilla, clara e interactiva desarrollada en Java?*
 
 ## Integrantes y roles
 
-| Integrante | Rol |
-|---|---|
-| Kevin Garcés | _(completar)_ |
-| Esteban Zambrano | _(completar)_ |
-| Cristian Gómez | _(completar)_ |
-| Erick Cordonez | _(completar)_ |
 
 ## Tecnologías
 
