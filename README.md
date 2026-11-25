@@ -2,78 +2,135 @@
   <img src="banner.svg" alt="banner" width="100%">
 </p>
 
-## (OJO) https://aulalogica.onrender.com (el plan gratuito tarda ~1 min en despertar)
-## REQUISITO PARA INGRESAR A LA PÁGINA WEB SE DEBE INGRESAR DESDE UN COMPUTADOR O LAPTOP
-Aplicativo didáctico de **Fundamentos de Programación en Java** — Proyecto Integrador,
-Universidad Técnica de Ambato · FISEI · Ing. José Caiza · julio–diciembre de 2026.
+# AulaLógica Web
 
-Reto: *¿cómo enseñar a otro estudiante los fundamentos de programación mediante una aplicación web
-sencilla, clara e interactiva desarrollada en Java?*
+Aplicativo didáctico de **Fundamentos de Programación en Java**.
 
-## Integrantes y roles
+🌐 **Sitio en línea:** https://aulalogica.onrender.com
 
+> ⚠️ **Importante**
+>
+> - El plan gratuito de Render tarda ~1 min en despertar.
+> - El progreso se pierde si el servidor está inactivo.
+> - Se debe ingresar desde un computador o laptop.
 
-## Tecnologías
+## 🚧 Limitaciones y mejoras futuras
 
-Java 21 (OpenJDK LTS) · Spring Boot 3.3 · Spring Web · Thymeleaf · Validation · Maven · HTML5/CSS3 ·
-Visual Studio Code · GitHub. Three.js (CDN) solo para la animación 3D de la portada.
+- Usuarios y progreso viven en memoria: se pierden al detener el servidor.
+- Las contraseñas no se cifran (el inicio de sesión es opcional según la guía).
+- Mejora futura: persistencia con H2 y estadísticas por usuario.
+  
+## 🎯 Reto
+
+*¿Cómo enseñar a otro estudiante los fundamentos de programación mediante una aplicación web sencilla, clara e interactiva desarrollada en Java?*
+
+## 🛠️ Tecnologías
+
+- Java 21 (OpenJDK LTS)
+- Spring Boot 3.3 · Spring Web · Thymeleaf · Validation
+- Maven
+- HTML5 / CSS3
+- Three.js (CDN), solo para la animación 3D de la portada
+- Visual Studio Code · GitHub
+
 No usa base de datos: los datos son clases y listas en memoria.
 
-## Requisitos previos
+## 🧭 Recorrido de demostración
 
-- JDK 21 (`java -version`)
-- Maven 3.9+ (`mvn -version`) o, en VS Code, *Extension Pack for Java* + *Spring Boot Extension Pack*
-- Navegador moderno
-
-## Cómo ejecutar (Visual Studio Code)
-
-1. Abrir la carpeta `aulalogica` en VS Code.
-2. Esperar a que la extensión de Java importe el proyecto Maven.
-3. Abrir `AulaLogicaApplication.java` y pulsar **Run** sobre `main`
-   (o desde la terminal: `mvn spring-boot:run`).
-4. Abrir **http://localhost:8080**.
-
-Compilar y probar: `mvn clean verify` · Generar JAR: `mvn clean package` y luego
-`java -jar target/aulalogica-1.0.0.jar`.
-
-## Recorrido de demostración
-
-1. Portada 3D: usar la rueda del mouse para entrar y pulsar **Inicio**.
+1. **Portada 3D:** usar la rueda del mouse para entrar y pulsar **Inicio**.
 2. **Registrarme** (o *Entrar como invitado*) → menú **Contenidos** (14 lecciones con ejemplo resuelto y pregunta).
-3. **Práctica en Java**: 7 formularios (selección, ciclos, validación…) procesados por Java.
-4. **Mecanografía**: 14 niveles con teclado virtual; se desbloquean con 90 % de precisión.
-5. **Evaluación**: 5 evaluaciones con nota y retroalimentación por pregunta.
+3. **Práctica en Java:** 7 formularios (selección, ciclos, validación…) procesados por Java.
+4. **Mecanografía:** 14 niveles con teclado virtual; se desbloquean con 90 % de precisión.
+5. **Evaluación:** 5 evaluaciones con nota y retroalimentación por pregunta.
 6. **Glosario** (22 conceptos), **Progreso**, **Perfil**, **Configuración** y **Equipo** (roles y créditos).
 
-## Arquitectura (MVC por capas)
+## 🏗️ Arquitectura (MVC por capas)
 
 ```
 Navegador → Controlador → Servicio → Modelo/datos → Thymeleaf
 ```
 
-| Ruta | Responsabilidad |
+| Capa | Responsabilidad |
 |---|---|
-| `src/main/java/ec/edu/uta/aulalogica/controller` | Rutas web y recepción de formularios |
-| `src/main/java/ec/edu/uta/aulalogica/service` | Validación, cálculos, puntajes y reglas didácticas |
-| `src/main/java/ec/edu/uta/aulalogica/model` | Tema, Ejercicio, Pregunta, Evaluacion, Resultado, Usuario… |
-| `src/main/resources/templates` | Páginas Thymeleaf |
-| `src/main/resources/static` | CSS, imágenes y JavaScript de interfaz |
-| `docs` | Requisitos, arquitectura, bosquejos, evidencias manuales, pruebas, contribuciones y lista de aceptación |
+| **Controlador** | Rutas web y recepción de formularios |
+| **Servicio** | Validación, cálculos, puntajes y reglas didácticas |
+| **Modelo** | Tema, Ejercicio, Pregunta, Evaluacion, Resultado, Usuario… |
+| **Vista (Thymeleaf)** | Páginas HTML con CSS y JavaScript de interfaz |
 
-Detalle en [`docs/arquitectura.md`](docs/arquitectura.md). Análisis y requisitos en [`docs/requisitos.md`](docs/requisitos.md); bosquejos en [`docs/bosquejos.md`](docs/bosquejos.md); evidencias manuales en [`docs/evidencias-manuales.md`](docs/evidencias-manuales.md).
+Detalle en [`docs/arquitectura.md`](docs/arquitectura.md).
 
-## Pruebas
+## 📁 Estructura del repositorio
 
-Casos normales, límites e inválidos documentados en [`docs/pruebas.md`](docs/pruebas.md);
-automatizados en `src/test/java/.../PracticaServiceTest.java` y `ContenidoServiceTest.java`.
+```
+aulalogica/
+│ ├── 🖼️ banner.svg
+│ ├── 📄 README.md
+│ ├── 📄 pom.xml
+│ ├── 🐳 Dockerfile
+│ ├── 📄 .dockerignore
+│ ├── 📄 .gitignore
+│ │
+│ ├── 📁 docs/
+│ │ ├── 📄 requisitos.md
+│ │ ├── 📄 arquitectura.md
+│ │ ├── 📄 bosquejos.md
+│ │ ├── 📄 evidencias-manuales.md
+│ │ ├── 📄 pruebas.md
+│ │ ├── 📄 contribuciones.md
+│ │ ├── 📄 aceptacion.md
+│ │ ├── 📁 bosquejos/
+│ │ │ ├── 🖼️ bosquejo1_inicio.svg
+│ │ │ ├── 🖼️ bosquejo2_temas.svg
+│ │ │ ├── 🖼️ bosquejo3_leccion.svg
+│ │ │ ├── 🖼️ bosquejo4_practica.svg
+│ │ │ └── 🖼️ bosquejo5_evaluacion.svg
+│ │ └── 📁 diagramas/
+│ │   ├── 🖼️ arquitectura_mvc.svg
+│ │   ├── 🖼️ flujo_seleccion.svg
+│ │   ├── 🖼️ flujo_suma.svg
+│ │   └── 🖼️ flujo_validacion.svg
+│ │
+│ └── 📁 src/
+│   ├── 📁 main/
+│   │ ├── 📁 java/ec/edu/uta/aulalogica/
+│   │ │ ├── 📄 AulaLogicaApplication.java
+│   │ │ ├── 📁 controller/   → rutas web y formularios
+│   │ │ ├── 📁 service/      → reglas, validación y puntajes
+│   │ │ └── 📁 model/        → clases de datos
+│   │ └── 📁 resources/
+│   │   ├── 📄 application.properties
+│   │   ├── 📁 templates/    → páginas Thymeleaf
+│   │   └── 📁 static/
+│   │     ├── 📁 css/
+│   │     ├── 📁 js/
+│   │     └── 📁 img/
+│   └── 📁 test/
+│     └── 📁 java/ec/edu/uta/aulalogica/service/
+│       ├── 📄 ContenidoServiceTest.java
+│       ├── 📄 PracticaServiceTest.java
+│       └── 📄 ReporteServiceTest.java
+```
 
-## Limitaciones y mejoras futuras
+## 📚 Documentación
 
-- Usuarios y progreso viven en memoria: se pierden al detener el servidor.
-- Las contraseñas no se cifran (el inicio de sesión es opcional según la guía).
-- Mejora futura: persistencia con H2 y estadísticas por usuario.
+| Documento | Contenido |
+|---|---|
+| [`docs/requisitos.md`](docs/requisitos.md) | Análisis y requisitos |
+| [`docs/bosquejos.md`](docs/bosquejos.md) | Bosquejos de las pantallas |
+| [`docs/evidencias-manuales.md`](docs/evidencias-manuales.md) | Evidencias manuales |
+| [`docs/pruebas.md`](docs/pruebas.md) | Casos de prueba |
+| [`docs/contribuciones.md`](docs/contribuciones.md) | Contribuciones |
+| [`docs/aceptacion.md`](docs/aceptacion.md) | Lista de aceptación |
 
-## Créditos
+## 🧪 Pruebas
 
-Imagen de fondo `static/img/fondo.jpg` y animación 3D con [three.js](https://threejs.org) (licencia MIT).
-_(Completar con la fuente/licencia de la imagen.)_
+Casos normales, límites e inválidos documentados en [`docs/pruebas.md`](docs/pruebas.md).
+Pruebas automatizadas en `PracticaServiceTest.java`, `ContenidoServiceTest.java` y `ReporteServiceTest.java`.
+
+## Autores
+>
+> - Kevin Garcés
+> - Cristian Gómez
+> - Esteban Zambrano
+> - Erick Cordonez
+> 
