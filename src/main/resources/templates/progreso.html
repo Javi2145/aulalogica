@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/base :: layout('Progreso','prog',~{::main})}">
+<body>
+<main>
+  <div class="view on" id="v-prog">
+    <h2 class="t">Progreso</h2>
+    <div class="card win"><div class="tools"><span class="box red"></span><span class="box yellow"></span><span class="box green"></span><span class="tl">Tu avance</span></div><div class="body" id="pg" th:insert="~{fragments/avance :: avance(${p})}"></div></div>
+  </div>
+</main>
+</body>
+</html>

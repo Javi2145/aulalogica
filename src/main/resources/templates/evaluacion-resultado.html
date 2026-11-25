@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/base :: layout('Evaluación','eval',~{::main})}">
+<body>
+<main>
+  <div class="view on" id="v-eval">
+    <h2 class="t">Evaluaciones</h2>
+    <div class="card win" id="ev">
+      <div class="tools"><span class="box red"></span><span class="box yellow"></span><span class="box green"></span><span class="tl" th:text="'Resultado · ' + ${evaluacion.titulo}">Resultado</span><span class="jv">JAVA</span></div>
+      <div class="body">
+        <h3 th:text="'Tu nota: ' + ${aciertos} + ' / ' + ${total} + ' (' + ${#numbers.formatDecimal(nota, 1, 1, 'POINT')} + ' sobre 10)'">Tu nota</h3>
+        <div class="bar"><i th:style="'width:' + ${porcentaje} + '%'"></i></div>
+        <p th:text="'Respondiste bien ' + ${aciertos} + ' de ' + ${total} + ' preguntas. Revisa cada una:'">Respondiste bien</p>
+        <div th:each="r : ${revision}" class="rv" th:classappend="${r.correcta} ? 'good' : 'badq'">
+          <p class="rq" th:text="${r.numero} + '. ' + ${r.enunciado}">Pregunta</p>
+          <p class="you" th:text="'Tu respuesta: ' + ${r.tuRespuesta}">Tu respuesta</p>
+          <th:block th:if="${r.correcta}"><p class="rk">✔ Correcto</p></th:block>
+          <th:block th:unless="${r.correcta}">
+            <p class="rx">✘ Incorrecto</p>
+            <p class="rk" th:text="'Respuesta correcta: ' + ${r.respuestaCorrecta}">Respuesta correcta</p>
+            <p class="rf" th:text="'Retroalimentación: ' + ${r.retroalimentacion}">Retroalimentación</p>
+          </th:block>
+        </div>
+        <div class="nav">
+          <form th:action="@{/evaluacion/{n}/iniciar(n=${e})}" method="get" style="display:contents"><button>Intentar otra vez</button></form>
+          <form th:action="@{/evaluaciones}" method="get" style="display:contents"><button>Ver evaluaciones</button></form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(titulo, activo, contenido)">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title th:text="'AulaLógica Web · ' + ${titulo}">AulaLógica Web</title>
+<link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<a class="skip" href="#principal">Saltar al contenido</a>
+
+<section id="home" class="scr on">
+  <div class="top">
+    <form th:action="@{/contenidos}" method="get" style="display:contents"><button class="btn"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg></span><span class="text">HOME</span></button></form>
+    <form th:action="@{/perfil}" method="get" style="display:contents"><button class="btn"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-5 0-9 2.500-9 6v2h18v-2c0-3.500-4-6-9-6z"/></svg></span><span class="text">PERFIL</span></button></form>
+    <form th:action="@{/configuracion}" method="get" style="display:contents"><button class="btn"><span class="icon"><svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></span><span class="text">CONFIGURACIÓN</span></button></form>
+    <form th:action="@{/equipo}" method="get" style="display:contents"><button class="btn"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6zM16 14c3.5 0 6 1.7 6 5v1h-4.5c0-2-.7-4-1.5-6z"/></svg></span><span class="text">EQUIPO</span></button></form>
+    <form th:action="@{/contenidos}" method="get" style="display:contents"><div class="sb"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.300-4.300"/></svg><input id="q" name="q" type="search" placeholder="Buscar tema…" aria-label="Buscar tema" th:value="${q}"></div></form>
+  </div>
+  <div class="layout" id="principal" tabindex="-1" th:classappend="${activo != 'cont'} ? 'collapsed'">
+    <div class="sidewrap">
+      <button type="button" class="arr" id="sbt" th:text="${activo != 'cont'} ? '▶' : '◀'" th:aria-label="${activo != 'cont'} ? 'Mostrar menú' : 'Ocultar menú'" th:aria-expanded="${activo == 'cont'}">◀</button>
+      <nav class="side" aria-label="Menú">
+        <div class="sec" id="sec-cont" style="--a:#2cf5ff"><div class="sh"><form th:action="@{/contenidos}" method="get" style="display:contents"><button class="main" th:classappend="${activo == 'cont'} ? 'act'">Contenidos<small>Temáticas y lecciones</small></button></form><button type="button" class="ex" aria-expanded="false" aria-label="Desplegar temas de Contenidos"><span>▾</span></button></div><div class="sub">
+          <form th:each="t, st : ${temas}" th:action="@{/leccion/{n}(n=${st.index})}" method="get" style="display:contents"><button class="sl" th:classappend="${usuario.leccionHecha(st.index)} ? 'dn'" th:text="(${usuario.leccionHecha(st.index)} ? '✔ ' : '') + ${t.titulo}">Tema</button></form>
+        </div></div>
+        <div class="sec" id="sec-prac" style="--a:#ffb454"><div class="sh"><form th:action="@{/practica}" method="get" style="display:contents"><button class="main" th:classappend="${activo == 'prac'} ? 'act'">Práctica en Java<small>Código, formulario y resultado</small></button></form><button type="button" class="ex" aria-expanded="false" aria-label="Desplegar temas de Práctica"><span>▾</span></button></div><div class="sub">
+          <form th:each="p, st : ${ejercicios}" th:action="@{/practica/{n}(n=${st.index})}" method="get" style="display:contents"><button class="sl" th:text="${p.nombre}">Práctica</button></form>
+        </div></div>
+        <div class="sec" id="sec-tec" style="--a:#a78bfa"><div class="sh"><form th:action="@{/mecanografia}" method="get" style="display:contents"><button class="main" th:classappend="${activo == 'tec'} ? 'act'">Mecanografía<small>Niveles con teclado y puntaje</small></button></form><button type="button" class="ex" aria-expanded="false" aria-label="Desplegar niveles de Mecanografía"><span>▾</span></button></div><div class="sub">
+          <th:block th:each="t, st : ${niveles}">
+            <form th:if="${usuario.nivelAbierto(st.index)}" th:action="@{/mecanografia/{n}(n=${st.index})}" method="get" style="display:contents"><button class="sl" th:classappend="${usuario.nivelSuperado(st.index)} ? 'dn'" th:text="(${usuario.nivelSuperado(st.index)} ? '✔ ' : '') + 'Nivel ' + ${st.count}">Nivel</button></form>
+            <button th:unless="${usuario.nivelAbierto(st.index)}" type="button" class="sl" disabled th:text="'Nivel ' + ${st.count}">Nivel</button>
+          </th:block>
+        </div></div>
+        <div class="sec" id="sec-eval" style="--a:#ff5ea8"><div class="sh"><form th:action="@{/evaluaciones}" method="get" style="display:contents"><button class="main" th:classappend="${activo == 'eval'} ? 'act'">Evaluación<small>Varias evaluaciones con nota</small></button></form><button type="button" class="ex" aria-expanded="false" aria-label="Desplegar Evaluación"><span>▾</span></button></div><div class="sub">
+          <form th:each="e, st : ${evaluaciones}" th:action="@{/evaluacion/{n}/iniciar(n=${st.index})}" method="get" style="display:contents"><button class="sl" th:classappend="${usuario.notas.containsKey(st.index)} ? 'dn'" th:text="(${usuario.notas.containsKey(st.index)} ? '✔ ' : '') + ${e.titulo}">Evaluación</button></form>
+        </div></div>
+        <div class="sec" id="sec-prog" style="--a:#2ed573"><div class="sh"><form th:action="@{/progreso}" method="get" style="display:contents"><button class="main" th:classappend="${activo == 'prog'} ? 'act'">Progreso<small>Tu avance por secciones</small></button></form><button type="button" class="ex" aria-expanded="false" aria-label="Desplegar Progreso"><span>▾</span></button></div><div class="sub">
+          <form th:action="@{/progreso}" method="get" style="display:contents"><button class="sl">Ver mi avance</button></form>
+        </div></div>
+        <div class="sec" id="sec-glos" style="--a:#ffd166"><div class="sh"><form th:action="@{/glosario}" method="get" style="display:contents"><button class="main" th:classappend="${activo == 'glos'} ? 'act'">Glosario<small>Conceptos clave del curso</small></button></form></div></div>
+      </nav>
+    </div>
+    <main th:replace="${contenido}"><p>Contenido</p></main>
+  </div>
+</section>
+
+<script th:src="@{/js/ui.js}"></script>
+</body>
+</html>

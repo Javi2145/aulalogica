@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/base :: layout('Lección','cont',~{::main})}">
+<body>
+<main>
+  <div class="view on" id="v-lec">
+    <div class="nav" style="margin:0 0 12px"><form th:action="@{/contenidos}" method="get" style="display:contents"><button style="flex:none">◀ Menú</button></form></div>
+    <div class="card win" id="lec">
+      <div class="tools"><span class="box red"></span><span class="box yellow"></span><span class="box green"></span><span class="tl" th:text="'Lección · ' + ${tema.titulo}">Lección</span><span class="jv">JAVA</span></div>
+      <div class="body">
+        <h3>Explicación breve</h3>
+        <p th:text="${tema.explicacion}">Explicación</p>
+        <section class="ej" aria-labelledby="ej-t">
+          <h3 id="ej-t">Ejemplo resuelto</h3>
+          <p th:text="${ejemplo.enunciado}">Enunciado</p>
+          <ol class="pasos"><li th:each="paso : ${ejemplo.pasos}" th:text="${paso}">Paso</li></ol>
+          <pre th:text="${ejemplo.codigo}">código</pre>
+          <p class="sal"><strong>Salida:</strong></p>
+          <pre class="out" th:text="${ejemplo.salida}">salida</pre>
+          <form th:action="@{/practica/{n}(n=${practicaRel})}" method="get"><button class="go" type="submit" th:text="'Practicar en Java: ' + ${ejercicios[practicaRel].nombre}">Practicar</button></form>
+        </section>
+        <div class="opts"><p style="margin-bottom:4px" th:text="${tema.pregunta}">Pregunta</p>
+          <form th:action="@{/leccion/{n}/responder(n=${i})}" method="post" style="display:contents">
+            <button th:each="o, k : ${tema.opciones}" type="submit" name="opcion" th:value="${k.index}" class="opt" th:classappend="${elegida != null and k.index == tema.correcta} ? 'ok' : (${elegida != null and k.index == elegida} ? 'no')" th:text="${o}">Opción</button>
+          </form>
+        </div>
+        <div class="fb" th:classappend="${elegida != null and !acierto} ? 'bad'" aria-live="polite" th:text="${mensaje}">Elige una opción para comprobar lo aprendido.</div>
+        <div class="nav">
+          <form th:action="@{/leccion/{n}(n=${anterior})}" method="get" style="display:contents"><button>Anterior</button></form>
+          <form th:action="@{/leccion/{n}(n=${siguiente})}" method="get" style="display:contents"><button>Siguiente</button></form>
+        </div>
+        <form th:action="@{/contenidos}" method="get"><button class="go">Finalizar</button></form>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
