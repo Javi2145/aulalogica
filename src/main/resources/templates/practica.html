@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/base :: layout('Práctica en Java','prac',~{::main})}">
+<body>
+<main>
+  <div class="view on" id="v-prac">
+    <h2 class="t">Práctica en Java</h2>
+    <div class="card win"><div class="tools"><span class="box red"></span><span class="box yellow"></span><span class="box green"></span><span class="tl">Ejemplo de codificación</span></div>
+      <div class="body">
+        <div class="nav" style="margin:0 0 12px" id="ptabs">
+          <form th:each="p, st : ${ejercicios}" th:action="@{/practica/{n}(n=${st.index})}" method="get" style="display:contents"><button th:style="${st.index == pi} ? 'border-color:var(--c);box-shadow:0 0 12px #2cf5ff66'" th:text="${p.nombre}">Práctica</button></form>
+        </div>
+        <pre id="code" th:text="${ejercicio.codigo}">código</pre>
+        <form th:action="@{/practica/{n}(n=${pi})}" method="post" novalidate>
+          <label for="pin" id="plab" style="font-size:.95rem" th:text="${ejercicio.etiqueta}">Etiqueta</label>
+          <input class="fi" id="pin" name="dato" inputmode="numeric" autocomplete="off" th:value="${dato}">
+          <button class="go" type="submit">Probar en Java</button>
+        </form>
+        <div class="fb" id="pfb" aria-live="polite" th:classappend="${resultado != null and resultado.error} ? 'bad'" th:text="(${resultado != null} ? ${resultado.mensaje} : 'Escribe un dato y pulsa “Probar en Java”.')">Escribe un dato y pulsa “Probar en Java”.</div>
+      </div></div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/base :: layout('Configuración','',~{::main})}">
+<body>
+<main>
+  <div class="view on" id="v-info"><div class="card win"><div class="tools"><span class="box red"></span><span class="box yellow"></span><span class="box green"></span><span class="tl">Configuración</span></div>
+    <div class="body ctr">
+      <div class="gear"><svg viewBox="0 0 24 24" width="56" height="56" fill="#2cf5ff"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></div>
+      <h3 style="margin-top:8px">Configuración</h3>
+      <p th:if="${usuario.invitado}">Estás como invitado: crea una cuenta para cambiar tu nombre o contraseña.</p>
+      <form th:action="@{/configuracion/nombre}" method="post" class="cf" style="display:block">
+        <p>Cambiar nombre</p>
+        <input class="fi" name="nombre" placeholder="Nuevo nombre" aria-label="Nuevo nombre" th:disabled="${usuario.invitado}">
+        <button class="go" type="submit" th:disabled="${usuario.invitado}">Guardar nombre</button>
+      </form>
+      <form th:action="@{/configuracion/clave}" method="post" class="cf" style="display:block">
+        <p>Cambiar contraseña</p>
+        <input class="fi" name="actual" type="password" placeholder="Contraseña actual" aria-label="Contraseña actual" th:disabled="${usuario.invitado}">
+        <input class="fi" name="nueva" type="password" placeholder="Nueva contraseña (mínimo 6)" aria-label="Nueva contraseña" th:disabled="${usuario.invitado}">
+        <button class="go" type="submit" th:disabled="${usuario.invitado}">Guardar contraseña</button>
+      </form>
+      <div class="fb" id="cfm" aria-live="polite" th:if="${mensaje != null}" th:classappend="${error} ? 'bad'" th:text="${mensaje}"></div>
+      <form th:action="@{/salir}" method="post"><button class="go out" type="submit">Cerrar sesión</button></form>
+    </div></div></div>
+</main>
+</body>
+</html>

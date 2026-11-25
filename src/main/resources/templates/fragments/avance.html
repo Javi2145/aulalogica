@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- Fragmento reutilizable: barras de avance (Progreso y Perfil) -->
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="avance(p)">
+  <div class="row"><span>Lecciones</span><span th:text="${p.lecciones} + ' de ' + ${p.totalLecciones}"></span></div>
+  <div class="bar"><i th:style="'width:' + ${p.pct(p.lecciones, p.totalLecciones)} + '%'"></i></div>
+  <div class="row"><span>Niveles de mecanografía</span><span th:text="${p.niveles} + ' de ' + ${p.totalNiveles}"></span></div>
+  <div class="bar"><i th:style="'width:' + ${p.pct(p.niveles, p.totalNiveles)} + '%'"></i></div>
+  <div class="row"><span>Evaluaciones realizadas</span><span th:text="${p.evaluaciones} + ' de ' + ${p.totalEvaluaciones}"></span></div>
+  <div class="bar"><i th:style="'width:' + ${p.pct(p.evaluaciones, p.totalEvaluaciones)} + '%'"></i></div>
+  <p style="margin-top:10px" th:text="'Mejor puntaje de teclado: ' + ${p.mejorTeclado}"></p>
+  <p th:each="e, st : ${evaluaciones}" th:text="${e.titulo} + ': ' + (${usuario.notas.containsKey(st.index)} ? (${usuario.notas.get(st.index)} + ' / ' + ${e.preguntas.size()}) : 'sin intentos')"></p>
+</th:block>
+</body>
+</html>
