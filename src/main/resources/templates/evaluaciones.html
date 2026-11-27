@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/base :: layout('Evaluación','eval',~{::main})}">
+<body>
+<main>
+  <div class="view on" id="v-eval">
+    <h2 class="t">Evaluaciones</h2>
+    <div class="jvbar"><span class="jv">JAVA</span><span>Elige una evaluación</span></div>
+    <div class="grid" id="evm">
+      <a th:each="e, st : ${evaluaciones}" class="card hv" th:href="@{/evaluacion/{n}/iniciar(n=${st.index})}" th:style="'--a:' + ${colores[(st.index + 3) % 6]}"><div class="tools"><span class="box red"></span><span class="box yellow"></span><span class="box green"></span><span class="jv">JAVA</span></div><div class="body"><h3 th:text="${e.titulo}">Evaluación</h3><p th:text="${e.preguntas.size()} + ' preguntas · ' + (${usuario.notas.containsKey(st.index)} ? ('mejor nota ' + ${usuario.notas.get(st.index)} + ' / ' + ${e.preguntas.size()}) : 'sin intentos')">preguntas</p></div></a>
+    </div>
+  </div>
+</main>
+</body>
+</html>

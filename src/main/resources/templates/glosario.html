@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/base :: layout('Glosario','glos',~{::main})}">
+<body>
+<main>
+  <div class="view on" id="v-glos">
+    <h2 class="t">Glosario</h2>
+    <div class="jvbar"><span class="jv">JAVA</span><span th:text="${terminos.size()} + ' conceptos del periodo académico'">Conceptos</span></div>
+    <div class="card win"><div class="tools"><span class="box red"></span><span class="box yellow"></span><span class="box green"></span><span class="tl">Conceptos clave</span></div>
+      <div class="body">
+        <dl class="glos">
+          <div th:each="t : ${terminos}"><dt th:text="${t.termino}">Término</dt><dd th:text="${t.definicion}">Definición</dd></div>
+        </dl>
+      </div></div>
+  </div>
+</main>
+</body>
+</html>
