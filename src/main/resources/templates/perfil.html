@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/base :: layout('Perfil','',~{::main})}">
+<body>
+<main>
+  <div class="view on" id="v-info"><div class="card win"><div class="tools"><span class="box red"></span><span class="box yellow"></span><span class="box green"></span><span class="tl">Perfil</span></div>
+    <div class="body">
+      <h3 th:text="${usuario.nombre}">Nombre</h3>
+      <p style="margin-bottom:14px" th:text="'Correo: ' + ${usuario.correo}">Correo</p>
+      <th:block th:replace="~{fragments/avance :: avance(${p})}"></th:block>
+    </div></div></div>
+</main>
+</body>
+</html>
